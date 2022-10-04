@@ -1,0 +1,6 @@
+//Pagina de nuestra aplicacion principal
+export const CalendarPage = () => {
+  return (
+    <div>CalendarPage</div>
+  )
+}
