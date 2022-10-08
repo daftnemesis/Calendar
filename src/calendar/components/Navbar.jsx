@@ -1,5 +1,6 @@
 import React from 'react'
 
+//Componente Navbar que sera nuestra barra de navegacion de la app
 export const Navbar = () => {
   return (
     <div className='w-full sticky top-0 '>
@@ -13,7 +14,7 @@ export const Navbar = () => {
             </span>
           </li>
           <li>
-            <button className='bg-red-700 rounded-lg px-3 focus:ring-2 focus:ring-red-600'>
+            <button className='bg-red-700 rounded-lg px-3 focus:ring-2 focus:ring-red-600 hover:bg-red-800'>
               <span>
                 <i className='fas fa-sign-out-alt'></i>
                 &nbsp;
