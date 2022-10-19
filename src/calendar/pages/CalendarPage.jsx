@@ -3,7 +3,7 @@ import { Calendar } from 'react-big-calendar'
 import { addHours } from 'date-fns/esm'
 import { getMessagesES, localizer } from '../../helpers'
 
-import { Navbar } from "../"
+import { Navbar, CalendarEvent } from "../"
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
@@ -19,11 +19,11 @@ const events = [{
   }
 }]
 
+
 //Pagina de nuestra aplicacion principal
 export const CalendarPage = () => {
 
   const eventStyleGetter = ( event, start, end, isSelected ) => {
-    console.log({event, start, end, isSelected})
 
     const style = {
       backgroundColor: '#347CF7',
@@ -37,7 +37,19 @@ export const CalendarPage = () => {
     }
 
   }
-  
+
+  const onDoubleClick = ( event ) => {
+    console.log({ doubleClick: event })
+  }
+
+  const onSelect = ( event ) => {
+    console.log({ onSelect: evet });
+  }
+
+  const onViewChanged = ( event ) => {
+    console.log({ viewChanged: event })
+  }
+
   return (
     <>
       <Navbar />
@@ -51,6 +63,9 @@ export const CalendarPage = () => {
         style={{ height: 'calc( 100vh - 48px)' }}
         messages = {getMessagesES()}
         eventPropGetter={eventStyleGetter}
+        components={{
+          event: CalendarEvent
+        }}
       />
 
     </>
