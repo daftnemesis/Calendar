@@ -8,24 +8,14 @@ import { Navbar, CalendarEvent, CalendarModal } from "../"
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { useState } from 'react'
 import { useUiStore } from '../../hooks'
-
-const events = [{
-  title: 'Cumpleanos de faby',
-  notes: 'Comprar pastel',
-  start: new Date(),
-  end: addHours(new Date(), 2),
-  bgColor: '#fafafa',
-  user: {
-    _id: '123',
-    name: 'Jose'
-  }
-}]
+import { useCalendarStore } from '../../hooks/useCalendarStore'
 
 
 //Pagina de nuestra aplicacion principal
 export const CalendarPage = () => {
 
   const { openDateModal } = useUiStore()
+  const { events } = useCalendarStore()
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week')
 
   const eventStyleGetter = ( event, start, end, isSelected ) => {
