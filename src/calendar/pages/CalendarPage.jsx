@@ -7,6 +7,7 @@ import { Navbar, CalendarEvent, CalendarModal } from "../"
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { useState } from 'react'
+import { useUiStore } from '../../hooks'
 
 const events = [{
   title: 'Cumpleanos de faby',
@@ -24,7 +25,7 @@ const events = [{
 //Pagina de nuestra aplicacion principal
 export const CalendarPage = () => {
 
-
+  const { openDateModal } = useUiStore()
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week')
 
   const eventStyleGetter = ( event, start, end, isSelected ) => {
@@ -44,7 +45,9 @@ export const CalendarPage = () => {
 
   // Evento para escuchar cuando se de un doble click sobre el evento
   const onDoubleClick = ( event ) => {
-    console.log({ doubleClick: event })
+    // console.log({ doubleClick: event })
+    openDateModal()
+
   }
   // Evenot para escuchar cuando se da un solo click sobre el evento
   const onSelect = ( event ) => {
