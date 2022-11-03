@@ -1,9 +1,8 @@
 import { Calendar } from 'react-big-calendar'
 
-import { addHours } from 'date-fns/esm'
 import { getMessagesES, localizer } from '../../helpers'
 
-import { Navbar, CalendarEvent, CalendarModal } from "../"
+import { Navbar, CalendarEvent, CalendarModal, FabAddNew, FabDelete } from "../"
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { useState } from 'react'
@@ -15,7 +14,7 @@ import { useCalendarStore } from '../../hooks/useCalendarStore'
 export const CalendarPage = () => {
 
   const { openDateModal } = useUiStore()
-  const { events } = useCalendarStore()
+  const { events, setActiveEvent } = useCalendarStore()
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week')
 
   const eventStyleGetter = ( event, start, end, isSelected ) => {
@@ -41,7 +40,7 @@ export const CalendarPage = () => {
   }
   // Evenot para escuchar cuando se da un solo click sobre el evento
   const onSelect = ( event ) => {
-    console.log({ onSelect: event });
+    setActiveEvent(event)
   }
   // Evento que se dispara cuando se cambia la vista del calendario
   // (por defecto mes, semana, dia y agenda)
@@ -73,7 +72,9 @@ export const CalendarPage = () => {
       />
 
       <CalendarModal />
-
+      
+      <FabAddNew />
+      <FabDelete />
     </>
   )
 }

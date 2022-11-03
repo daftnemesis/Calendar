@@ -8,6 +8,8 @@ import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import { useMemo } from 'react';
 import { useUiStore } from '../../hooks';
+import { useEffect } from 'react';
+import { useCalendarStore } from '../../hooks/useCalendarStore';
 
 registerLocale('es', es)
 
@@ -27,10 +29,11 @@ Modal.setAppElement('#root');
 export const CalendarModal = () => {
   const { isDateModalOpen, closeDateModal } = useUiStore()
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const { activeEvent, startSavingEvent } = useCalendarStore()
 
   const [formValues, setFormValues] = useState({
-    title: 'Jose',
-    notes: 'Lozano',
+    title: '',
+    notes: '',
     start: new Date(),
     end: addHours(new Date(), 2),
   })
@@ -45,6 +48,13 @@ export const CalendarModal = () => {
 
   }, [formValues.title, formSubmitted])
 
+  useEffect(() => {
+    if(activeEvent !== null) {
+      setFormValues({...activeEvent})
+    }
+  }, [activeEvent])
+  
+
   const onInputChange = ({target}) => {
     setFormValues({
       ...formValues,
@@ -52,7 +62,7 @@ export const CalendarModal = () => {
     })
   }
 
-  const onSubmit = ( event ) => {
+  const onSubmit = async( event ) => {
     event.preventDefault();
 
     setFormSubmitted(true)
@@ -68,9 +78,9 @@ export const CalendarModal = () => {
 
     console.log(formValues)
 
-    // TODO:
-    // cerrar modal
-    //remover errores en pantalla
+    await startSavingEvent(formValues)
+    closeDateModal()
+    setFormSubmitted(false)
 
   }
 
