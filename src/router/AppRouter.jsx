@@ -6,7 +6,7 @@ import { CalendarPage } from "../calendar"
 //Componente de las rutas principales
 export const AppRouter = () => {
 
-  const authStatus = 'not-authenticate' // Variable temporal para realizar rutas condicionales
+  const authStatus = 'not-authenticated' // Variable temporal para realizar rutas condicionales
 
   return (
     <Routes>
